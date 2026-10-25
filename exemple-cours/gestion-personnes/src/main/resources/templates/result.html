@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{list.title}">Liste des personnes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: menu}"></div>
+
+<main>
+    <h1 th:text="#{list.title}">Liste des personnes</h1>
+
+    <p th:if="${#lists.isEmpty(personnes)}" th:text="#{list.empty}">Aucune personne trouvée.</p>
+
+    <table th:unless="${#lists.isEmpty(personnes)}">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Num</th>
+                <th th:text="#{form.prenom}">Prénom</th>
+                <th th:text="#{form.nom}">Nom</th>
+                <th th:text="#{list.addresses}">Adresses</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p, status : ${personnes}" th:class="${status.odd} ? 'odd' : 'even'">
+                <td th:text="${status.count}">1</td>
+                <td th:text="${p.num}">1</td>
+                <td th:text="${p.prenom}">Youness</td>
+                <td th:text="${p.nom}">khamlichi</td>
+                <td>
+                    <span class="adresse" th:each="a : ${p.adresses}"
+                          th:text="|${a.rue}, ${a.codePostal} ${a.ville}|">Trik ain chkaf, 30000 Fès</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination (affichée seulement pour /showAllByPage/{i}/{j}) -->
+    <div class="pagination" th:if="${totalPages != null}">
+        <a th:if="${pageCourante > 0}"
+           th:href="@{/showAllByPage/{i}/{j}(i=${pageCourante - 1},j=${taille})}"
+           th:text="#{page.prev}">Précédent</a>
+        <span th:text="|${pageCourante + 1} / ${totalPages}|">1 / 1</span>
+        <a th:if="${pageCourante + 1 < totalPages}"
+           th:href="@{/showAllByPage/{i}/{j}(i=${pageCourante + 1},j=${taille})}"
+           th:text="#{page.next}">Suivant</a>
+    </div>
+
+    <!-- Recherche par nom (repository : findByNomContainingIgnoreCase) -->
+    <form class="inline" th:action="@{/search}" method="get">
+        <input type="text" name="nom" th:placeholder="#{form.nom}" required>
+        <button type="submit" th:text="#{search.button}">Rechercher par nom</button>
+    </form>
+
+    <form class="inline" th:action="@{/addPerson}" method="get">
+        <button type="submit" th:text="#{menu.add}">Ajouter une personne</button>
+    </form>
+</main>
+
+<div th:replace="~{fragments/layout :: copy}"></div>
+</body>
+</html>

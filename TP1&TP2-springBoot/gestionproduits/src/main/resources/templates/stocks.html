@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des stocks</title>
+</head>
+<body>
+    <h1>Gestion des stocks</h1>
+
+    <p th:if="${message}" th:text="${message}"></p>
+    <p th:if="${erreur}" th:text="${erreur}"></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité en stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="p : ${produits}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.nom}"></td>
+                <td th:text="${p.prix}"></td>
+
+                <td>
+                    <form th:action="@{/stocks/{id}(id=${p.id})}"
+                          method="post">
+                        <input type="number"
+                               name="quantiteStock"
+                               min="0"
+                               required
+                               th:value="${p.quantiteStock != null ? p.quantiteStock : 0}">
+
+                        <button type="submit">Enregistrer</button>
+                    </form>
+                </td>
+
+                <td>Modification du stock</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{/home}">Retour à l'accueil</a></p>
+</body>
+</html>

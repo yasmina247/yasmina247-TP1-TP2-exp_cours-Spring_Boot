@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Fragment : menu -->
+<nav th:fragment="menu">
+    <a th:href="@{/showAll}" th:text="#{menu.all}">Toutes les personnes</a>
+    <a th:href="@{/addPerson}" th:text="#{menu.add}">Ajouter une personne</a>
+    <a th:href="@{/showAllSorted/nom}" th:text="#{menu.sortedNom}">Tri par nom</a>
+    <a th:href="@{/showAllSorted/prenom}" th:text="#{menu.sortedPrenom}">Tri par prénom</a>
+    <a th:href="@{/showAllByPage/{i}/{j}(i=0,j=3)}" th:text="#{menu.page}">Pagination</a>
+    <span class="lang">
+        <a href="?lang=fr">FR</a> |
+        <a href="?lang=en">EN</a>
+    </span>
+</nav>
+
+<!-- Fragment : footer -->
+<footer th:fragment="copy">
+    &copy; ENSA Fès - <span th:text="#{app.title}">Gestion des personnes</span>
+</footer>
+
+</body>
+</html>

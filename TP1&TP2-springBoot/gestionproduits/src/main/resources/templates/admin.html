@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+</head>
+<body>
+    <h1>Tableau de bord administrateur</h1>
+
+    <h2>Gestion des utilisateurs</h2>
+    <p>Consulter les comptes et ajouter un utilisateur.</p>
+    <a th:href="@{/admin/users}">Gérer les utilisateurs</a>
+
+    <h2>Gestion des produits</h2>
+    <p>Consulter les produits enregistrés dans la base.</p>
+    <a th:href="@{/produits}">Afficher les produits</a>
+
+    <h2>Gestion des stocks</h2>
+    <a th:href="@{/stocks}">Afficher et modifier les stocks</a>
+
+    <h2>Gestion des ventes</h2>
+    <a th:href="@{/ventes}">Enregistrer une vente et consulter l'historique</a>
+
+    <p><a th:href="@{/home}">Retour à l'accueil</a></p>
+</body>
+</html>

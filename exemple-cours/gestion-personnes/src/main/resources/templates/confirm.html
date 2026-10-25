@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{confirm.title}">Bienvenue</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: menu}"></div>
+
+<main>
+    <h1 th:text="#{confirm.title}">Bienvenue</h1>
+    <p th:text="#{confirm.text(${nom},${prenom})}">La personne ... a été ajoutée avec succès.</p>
+    <form th:action="@{/showAll}" method="get">
+        <button type="submit" th:text="#{confirm.showAll}">Afficher tout</button>
+    </form>
+</main>
+
+<div th:replace="~{fragments/layout :: copy}"></div>
+</body>
+</html>
